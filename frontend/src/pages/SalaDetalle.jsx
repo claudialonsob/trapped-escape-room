@@ -41,7 +41,7 @@ const SalaDetalle = () => {
   const { id } = useParams();
   const sala = salasInfo[id];
 
-  // Para que la página siempre empiece arriba de todo
+  // Magia para que la página siempre empiece arriba de todo
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
@@ -57,46 +57,45 @@ const SalaDetalle = () => {
     );
   }
 
-  // Renderizado de la sala dinámica (Quitamos min-vh-100 a pedido de Chat)
+  // Renderizado de la sala dinámica (Ajustado para pantalla única)
   return (
-    <div className="container py-5 mt-4">
-      <div className="row align-items-center mb-5">
+    <div className="container py-4 mt-2">
+      <div className="row align-items-center">
         
-        {/* Imagen */}
-        <div className="col-md-6 mb-4 mb-md-0">
+        {/* Imagen: Redujimos la altura de 500px a 380px para que ocupe menos espacio vertical */}
+        <div className="col-md-6 mb-3 mb-md-0">
           <img 
             src={sala.imagen} 
             alt={sala.nombre} 
             className="img-fluid rounded shadow-lg w-100" 
-            style={{ maxHeight: '500px', objectFit: 'cover' }}
+            style={{ maxHeight: '380px', objectFit: 'cover' }}
           />
         </div>
         
-        {/* Detalles */}
+        {/* Detalles: Cambiamos display-4 por display-5, y achicamos los márgenes (mb) */}
         <div className="col-md-6">
-          <h2 className="display-4 fw-bold mb-3">{sala.nombre}</h2>
-          <p className="lead text-muted mb-4">{sala.descripcion}</p>
+          <h2 className="display-5 fw-bold mb-2">{sala.nombre}</h2>
+          <p className="lead text-muted mb-3" style={{ fontSize: '1.1rem' }}>{sala.descripcion}</p>
           
-          <ul className="list-group list-group-flush mb-5">
-            <li className="list-group-item bg-transparent px-0">
+          <ul className="list-group list-group-flush mb-4">
+            <li className="list-group-item bg-transparent px-0 py-1">
               <strong>Dificultad:</strong> {sala.dificultad}
             </li>
-            <li className="list-group-item bg-transparent px-0">
+            <li className="list-group-item bg-transparent px-0 py-1">
               <strong>Duración:</strong> {sala.duracion}
             </li>
-            <li className="list-group-item bg-transparent px-0">
+            <li className="list-group-item bg-transparent px-0 py-1">
               <strong>Capacidad permitida:</strong> {sala.capacidad}
             </li>
-            <li className="list-group-item bg-transparent px-0 text-primary">
+            <li className="list-group-item bg-transparent px-0 py-1 text-primary">
               <strong>Precio total:</strong> {sala.precio}
             </li>
           </ul>
 
-          <div className="d-flex flex-column flex-sm-row gap-3">
-            {/* Botón provisorio, luego lo conectaremos al formulario */}
-            <button className="btn btn-danger btn-lg fw-bold w-100">
+          <div className="d-flex flex-column flex-sm-row gap-2">
+            <Link to={`/reserva/${id}`} className="btn btn-danger btn-lg fw-bold w-100">
               Reservar esta sala
-            </button>
+            </Link>
             <Link to="/" className="btn btn-outline-dark btn-lg fw-bold w-100">
               Volver al inicio
             </Link>

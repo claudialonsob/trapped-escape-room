@@ -1,11 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import imgPrincipal from '../assets/principal.jpg';
 import imgFragmentado from '../assets/fragmentado.jpg';
 import imgConexion from '../assets/conexion.jpg';
 import imgAcertijo from '../assets/acertijo.jpg';
 
 const Home = () => {
+  const location = useLocation();
+
+  // Escucha los cambios en la URL y hace el scroll suave
+  useEffect(() => {
+    if (location.hash) {
+      // Busca el elemento por su ID (ej: "nosotros") quitando el "#"
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Si no hay hash, va arriba de todo
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
   return (
     <main>
       {/* Sección Inicio (Hero) */}

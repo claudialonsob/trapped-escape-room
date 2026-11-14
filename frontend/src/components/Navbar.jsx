@@ -1,14 +1,17 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top py-3">
       <div className="container d-flex flex-column">
 
-        {/* Título arriba, centrado */}
-        <a className="navbar-brand fw-bold navbar-brand-title mx-auto mb-2" href="#inicio">
+        {/* Título */}
+        <Link
+          className="navbar-brand fw-bold navbar-brand-title mx-auto mb-2"
+          to="/#inicio"
+        >
           Trapped Escape Room
-        </a>
+        </Link>
 
         {/* Botón hamburguesa */}
         <button
@@ -23,20 +26,23 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Enlaces centrados */}
-        <div className="collapse navbar-collapse justify-content-center w-100" id="navbarNav">
+        {/* Enlaces de navegación */}
+        <div
+          className="collapse navbar-collapse justify-content-center w-100"
+          id="navbarNav"
+        >
           <ul className="navbar-nav text-center">
             <li className="nav-item mx-2">
-              <a className="nav-link active" href="#inicio">Inicio</a>
+              <Link className="nav-link" to="/#inicio">Inicio</Link>
             </li>
             <li className="nav-item mx-2">
-              <a className="nav-link" href="#nosotros">Nosotros</a>
+              <Link className="nav-link" to="/#nosotros">Nosotros</Link>
             </li>
             <li className="nav-item mx-2">
-              <a className="nav-link" href="#salas">Salas</a>
+              <Link className="nav-link" to="/#salas">Salas</Link>
             </li>
             <li className="nav-item mx-2">
-              <a className="nav-link" href="#contacto">Contacto</a>
+              <Link className="nav-link" to="/#contacto">Contacto</Link>
             </li>
           </ul>
         </div>
