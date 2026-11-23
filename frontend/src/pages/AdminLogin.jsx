@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function AdminLogin() {
   const [usuario, setUsuario] = useState('');
@@ -40,50 +40,67 @@ function AdminLogin() {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <div className="card shadow-sm p-4 w-100" style={{ maxWidth: '420px' }}>
-        <h2 className="text-center mb-4">Acceso Administrador</h2>
+    <main className="bg-dark min-vh-100 d-flex align-items-center justify-content-center py-5 px-3">
+      <div className="card shadow-lg border-0 w-100 overflow-hidden" style={{ maxWidth: '420px' }}>
+        {/* Encabezado con estética Trapped */}
+        <div className="bg-black text-white text-center py-4 px-3 border-bottom border-danger border-3">
+          <h1 className="h4 fw-bold mb-1 text-uppercase">Trapped Escape Room</h1>
+          <p className="small text-secondary mb-0">Panel de Administración</p>
+        </div>
 
-        {error && (
-          <div className="alert alert-danger" role="alert">
-            {error}
+        {/* Cuerpo del formulario */}
+        <div className="card-body p-4 bg-white">
+          <h2 className="h5 fw-bold text-center text-dark mb-4">Iniciar sesión</h2>
+
+          {error && (
+            <div className="alert alert-danger py-2 small" role="alert">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label fw-semibold text-dark">Usuario</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Ingresá tu usuario"
+                value={usuario}
+                onChange={(e) => setUsuario(e.target.value)}
+                required
+                autoFocus
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="form-label fw-semibold text-dark">Contraseña</label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-danger btn-lg fw-bold w-100"
+              disabled={cargando}
+            >
+              {cargando ? 'Ingresando...' : 'Ingresar'}
+            </button>
+          </form>
+
+          <div className="text-center mt-4 pt-3 border-top">
+            <Link to="/" className="text-decoration-none text-muted small">
+              ← Volver al sitio público
+            </Link>
           </div>
-        )}
-
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label className="form-label">Usuario</label>
-            <input
-              type="text"
-              className="form-control"
-              value={usuario}
-              onChange={(e) => setUsuario(e.target.value)}
-              required
-              autoFocus
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="form-label">Contraseña</label>
-            <input
-              type="password"
-              className="form-control"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="btn btn-dark w-100"
-            disabled={cargando}
-          >
-            {cargando ? 'Ingresando...' : 'Iniciar sesión'}
-          </button>
-        </form>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
 

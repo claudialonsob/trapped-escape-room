@@ -1,0 +1,12 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno
+.env
+backend/.env
+frontend/.env
+
+# Builds y logs
+dist/
+*.log
+.DS_Store

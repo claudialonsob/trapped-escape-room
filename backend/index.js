@@ -260,7 +260,7 @@ app.get('/api/reservas', verificarToken, (req, res) => {
       return res.status(500).json({ error: 'Error interno al verificar vencimientos' });
     }
 
-    const sql = `
+      const sql = `
       SELECT 
         r.id_reserva,
         r.id_sala,
@@ -277,7 +277,16 @@ app.get('/api/reservas', verificarToken, (req, res) => {
         r.fecha_creacion
       FROM Reservas r
       INNER JOIN Salas s ON r.id_sala = s.id_sala
-      ORDER BY r.fecha DESC, r.horario ASC
+      ORDER BY
+        CASE r.estado_reserva
+          WHEN 'Pendiente de pago' THEN 1
+          WHEN 'Confirmada' THEN 2
+          WHEN 'Vencida' THEN 3
+          WHEN 'Cancelada' THEN 4
+          ELSE 5
+        END ASC,
+        r.fecha ASC,
+        r.horario ASC
     `;
 
     db.query(sql, (err, results) => {
